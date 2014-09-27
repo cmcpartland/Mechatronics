@@ -1,0 +1,8 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+DEBUG CLS
+
+DO
+  DEBUG ? IN3
+  PAUSE 260
+LOOP

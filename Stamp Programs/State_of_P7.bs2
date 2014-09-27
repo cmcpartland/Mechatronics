@@ -1,0 +1,10 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+DEBUG CLS
+INPUT 7
+OUTPUT 12
+
+DO
+  OUT12 = IN7
+  DEBUG HOME, "The state of P7 is ", BIN IN7
+LOOP

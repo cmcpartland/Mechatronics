@@ -1,0 +1,38 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+DEBUG CLS, "PROGRAM RUNNING", CR
+
+'Speed is on a scale of 1 to 10'
+speed  VAR Word
+counter VAR Word
+servoDurationRight VAR Word
+servoDurationLeft VAR Word
+servoPinRight PIN 12
+servoPinLeft PIN  13
+resetPiezoPin PIN 4
+
+FREQOUT resetPiezoPin, 1000, 3000
+MAIN:
+  DO
+    DEBUG "Enter speed (-10 to 10): ", CR
+    DEBUGIN SNUM speed
+    DEBUG "Running...", CR
+    FOR counter = 1 TO 244
+      'Define duration (ms)'
+      GOSUB convertSpeedToDuration
+      PULSOUT servoPinRight, servoDurationRight
+      PULSOUT servoPinLeft, servoDurationLeft
+      PAUSE 20
+    NEXT
+  LOOP
+  END
+
+
+'Converts duration (ms) to duration argument for servo'
+convertSpeedToDuration:
+  'Wheels move in opposite directions'
+  servoDurationRight = -(speed*10) + 750
+  servoDurationLeft = (speed*10) + 750
+  RETURN
+
